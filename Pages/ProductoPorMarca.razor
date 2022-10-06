@@ -1,0 +1,53 @@
+﻿@page "/productopormarca/{id:int}"
+@using Models
+@using Services
+@inject IProductoService ProductoService
+
+<MudText Typo="Typo.h4">Productos</MudText>
+@if (productos == null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <MudGrid>
+        @foreach (var item in productos)
+        {
+            <MudItem xs="12" sm="10" md="6" lg="4">
+                <MudCard>
+                    <MudCardHeader Class="blue darken-1">
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.body2">@item.Nombre</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText Typo="Typo.body2">@item.Descripcion</MudText>
+                    </MudCardContent>
+
+                    <MudCardContent>
+                        <MudText Typo="Typo.body2">@item.Precio</MudText>
+                    </MudCardContent>
+                    <MudCardContent>
+                        <MudText Typo="Typo.body2">@item.Fecha</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Link="@($"/detalles/{item.Id}")" Variant="Variant.Outlined" Color="Color.Success">Detalles</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+}
+
+@code {
+   [Parameter]
+    public int Id { get; set; }
+
+    IEnumerable<Producto> productos = new List<Producto>();
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id > 0)
+            productos = await ProductoService.GetByMarca(Id);
+    }
+
+}

@@ -1,0 +1,40 @@
+﻿<h3>Marcas</h3>
+@page "/marcas"
+@using Models
+@using Services
+@inject IMarcaService  MarcaService
+
+
+<MudText Typo="Typo.h3">Hamburguesas sv</MudText>
+
+<MudGrid>
+    @foreach (var item in mar)
+    {
+        <MudItem xs="12" sm="10" md="6" lg="4">
+            <MudCard>
+                <MudCardHeader Class="pink">
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">@item.Nombre</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardActions>
+                    <MudButton Link="@($"/productoporMarca/{item.Id}")" Variant="Variant.Text" Color="Color.Tertiary" Class="text-center"> ver Productos</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+
+
+
+@code {
+    IEnumerable<Marca> mar = new List<Marca>();
+    protected override async Task OnInitializedAsync()
+    {
+        mar = await MarcaService.GetAll();
+    }
+}
+
+
+

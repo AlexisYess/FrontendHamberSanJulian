@@ -1,0 +1,19 @@
+﻿
+<MudNavMenu Color="Color.Tertiary" Style="border-left-style">
+    <MudNavLink Icon="@Icons.Material.Filled.Home" IconColor="Color.Inherit" Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+    <MudNavLink Icon="@Icons.Filled.People" IconColor="Color.Inherit" Href="/clientes" Match="NavLinkMatch.Prefix">Clientes</MudNavLink>
+    <MudNavLink Icon="@Icons.Sharp.AddShoppingCart" IconColor="Color.Inherit" Href="/productos" Match="NavLinkMatch.Prefix">Productos</MudNavLink>
+    <MudNavGroup Title="Mas" Expanded="true">
+
+        <MudNavLink Href="/categorias" Icon="@Icons.Sharp.Apps" IconColor="Color.Inherit" Match="NavLinkMatch.Prefix">Categorias</MudNavLink>
+        <MudNavLink Href="/marcas" Icon="@Icons.Sharp.AppsOutage" IconColor="Color.Inherit" Match="NavLinkMatch.Prefix">Marcas</MudNavLink>
+    </MudNavGroup>
+    <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+    <MudSwitch @bind-Checked="@_isDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="Tema Dark xd" />
+
+    
+    @code{
+        private MudTheme _theme = new();
+        private bool _isDarkMode;
+    }
+</MudNavMenu>
